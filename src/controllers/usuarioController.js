@@ -36,7 +36,7 @@ const usuarioController = {
       }
       
     } catch (error) {
-      res.status(400).json("Falha ao logar");
+      res.status(400).json({ error });
       console.error(error);
     }
   },
