@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "build": "echo \"No build specified\" && exit 1",
     "dev": "node --watch src/app.js"
   },
   "keywords": [],
