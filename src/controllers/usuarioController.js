@@ -2,8 +2,10 @@ require('dotenv').config();
 const User = require('../models/User');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const secret = 'univesp';
 
 const usuarioController = {
+
   async login(req, res) {
     try {
       const { email, senha } = req.body;
@@ -21,16 +23,16 @@ const usuarioController = {
 
 
       try {
-        const secret = process.env.SECRET
+        
         const token = jwt.sign({
           id: userExist._id,
           nome: userExist.nome,
           email: userExist.email
-        }, secret);
+        }, secret, { expiresIn: 300 });
 
         res.status(200).json({msg: 'Autenticado', token})
       } catch (error) {
-        return res.status(400).json(`ERRO X`)
+        return res.status(401).json(`ERRO X`)
       }
       
     } catch (error) {
@@ -113,4 +115,5 @@ const usuarioController = {
 }
 }
 
-module.exports = usuarioController;
+
+module.exports = usuarioController
