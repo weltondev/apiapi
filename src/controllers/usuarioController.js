@@ -28,7 +28,7 @@ const usuarioController = {
           id: userExist._id,
           nome: userExist.nome,
           email: userExist.email
-        }, secret, { expiresIn: 300 });
+        }, secret, { expiresIn: 600 });
 
         res.status(200).json({msg: 'Autenticado', token})
       } catch (error) {
