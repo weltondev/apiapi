@@ -22,7 +22,7 @@ const usuarioController = {
       }
 
 
-      try {
+      try {}
         
         const token = jwt.sign({
           id: userExist._id,
