@@ -30,7 +30,7 @@ const usuarioController = {
         return res.status(400).json(`Senhas não conferem!`);
       }
 
-      // Verifica se o usuário já existe
+      // Verifica se o usuário já exist
       if(userExist) {
         return res.status(400).json(`Usuário já cadastrado!`);
       }
