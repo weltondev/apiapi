@@ -7,7 +7,8 @@ function verificaToken(req, res, next){
   try{
     jwt.verify(token, secret)
   }catch(error){
-    res.status(400).json('Token inválido')
+    res.status(400).json(`${error} Token inválido!`)
+
   }
 
     next();
