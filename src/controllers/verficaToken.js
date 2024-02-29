@@ -8,7 +8,6 @@ function verificaToken(req, res, next){
 
     next();
   });
-  
 }
 
 module.exports = verificaToken;
