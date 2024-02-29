@@ -48,7 +48,7 @@ const usuarioController = {
 
       res.status(200).send({ usuarios })
     } catch (error) {
-      res.status(400).json("Falha ao listar usuários");
+      res.json("Falha ao listar usuários");
       console.error(error);
     }
   },
