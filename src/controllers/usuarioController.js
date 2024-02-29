@@ -32,7 +32,7 @@ const usuarioController = {
 
         res.status(200).json({msg: 'Autenticado', token})
       } catch (error) {
-        return res.status(401).json(`ERRO X`)
+        return res.status(401).json(`Falha ao autenticar!`);
       }
       
     } catch (error) {
