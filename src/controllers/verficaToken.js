@@ -7,7 +7,7 @@ function verificaToken(req, res, next){
     if(error) return res.status(401).json(`Não Autorizado!`);
 
     next();
-  })
+  });
   
 }
 
