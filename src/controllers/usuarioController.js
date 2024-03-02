@@ -43,19 +43,34 @@ const usuarioController = {
 
   async listar(req, res) {
     try {
-      const usuarios = await User.find({}, '-senha');
+      const usuarios = await User.find({}, '-senha').populate("produto");
 
-
-      res.status(200).send({ usuarios })
+      res.send(usuarios)
     } catch (error) {
       res.json("Falha ao listar usuários");
       console.error(error);
     }
   },
 
+  async listarId(req, res) {
+    try {
+      const { id } = req.params;
+      const user = await User.findById(id,'-senha').populate('produto');
+
+      if(!user){
+        res.status(400).send('Usuário não encontrado!');
+      }
+
+      res.status(200).send(user);
+    } catch (error) {
+      console.log(error.message)
+      res.status(400).send('Falha ao listar!');
+    }
+  },
+
   async criar(req, res) {
     try {
-      const { nome, email, senha, confirma } = req.body;
+      const { nome, email, senha, confirma, produtos } = req.body;
       const userExist = await User.findOne({ email });
       const senhaCripto = bcrypt.hashSync(senha, 12);
 
@@ -75,7 +90,7 @@ const usuarioController = {
       }
 
       //Cria o usuário no banco
-      const usuario = await User.create({ nome, email, senha: senhaCripto });
+      const usuario = await User.create({ nome, email, senha: senhaCripto, produtos });
 
       res.status(201).json(usuario);
     } catch (error) {
@@ -89,7 +104,7 @@ const usuarioController = {
       const { id } = req.params;
       const user = await User.findByIdAndUpdate(id, req.body);
 
-      return res.status(200).send(`Usuario atualizado com sucesso!`);
+      return res.status(200).send(`Usuario atualizado com sucesso!\n${user}`);
     } catch (error) {
       res.status(400).json("Falha ao atualozar usuário");
       console.error(error);
